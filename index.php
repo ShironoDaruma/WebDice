@@ -1,22 +1,6 @@
 <?php
-  function console_log($data){
-    echo '<script>';
-    echo 'console.log('.json_encode($data).')';
-    echo '</script>';
-  }
-
-  $dsn = 'mysql:host=mysql1.php.xdomain.ne.jp;dbname=shirodaruma_webdice';
-  $username = 'shirodaruma_dev1';
-  $password = 'dev1DEV1';
-
-  try {
-    $db = new PDO($dsn, $username, $password);
-    console_log("db接続成功");
-  } catch (PDOException $e) {
-    console_log("db接続失敗: ".$e->getMessage());
-    exit();
-  }
-
+  require("bin/php/tools.php");
+  require_once("bin/php/connection_database.php");
 ?>
 
 <!DOCTYPE html>
@@ -39,8 +23,8 @@
 
         <p><span class="textWhite">https://shirodaruma.php.xdomain.jp/WebDice/rooms/</span><input type="url" id="url" name="url" placeholder="ルームURLを入力"></p>
         <p><span class="textWhite">パスワードを入力</span><input type="password" id="password" name="password"></p>
-        <input type="submit" id="submit" name="newroom" value="新規ルーム">
-        <input type="submit" id="submit" name="roomIn" value="ルーム入室">
+        <input type="submit" id="newroom" name="newroom" value="新規ルーム">
+        <input type="submit" id="roomIn" name="roomIn" value="ルーム入室">
       </form>
     </div>
   </body>

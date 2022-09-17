@@ -38,9 +38,19 @@ body {
   color: #ffffff;
   ime-mode: disabled;
 }
-
 .title .input:focus {
   outline: none;
+}
+
+.title input[type="submit"] {
+  width: 30%;
+  max-width: 200px;
+  height: 40px;
+  background-color: #66cc00;
+  border: #66cc00;
+  border-radius: 2px;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .textRed {

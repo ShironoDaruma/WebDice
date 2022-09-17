@@ -8,21 +8,26 @@
   if ($_POST['newroom']) {
     $room = $_POST['room'];
     $password = $_POST['password'];
-    // ルームが既にあるか確認
-    $sql = 'SELECT * FROM rooms WHERE room = :room';
-    $prepare = $db->prepare($sql);
-    $prepare->bindValue(':room', $room, PDO::PARAM_STR);
-    $prepare->execute();
-    $result = $prepare->fetchALL();
-    $resultcnt = count($result);
-    console_log($sql.":".$resultcnt);
-    // ルームがなければルームを新規作成
-    if (!$resultcnt) {
-      $sql = 'INSERT INTO rooms (room, pass) VALUE (:room, :pass)';
+    // 入力内容が半角英数か確認
+    if ( ishalfwidth($room) && ishalfwidth($password) ) {
+      // ルームが既にあるか確認
+      $sql = 'SELECT * FROM rooms WHERE room = :room';
       $prepare = $db->prepare($sql);
       $prepare->bindValue(':room', $room, PDO::PARAM_STR);
-      $prepare->bindValue(':pass', $password, PDO::PARAM_STR);
       $prepare->execute();
+      $result = $prepare->fetchALL();
+      $resultcnt = count($result);
+      console_log($sql.":".$resultcnt);
+      // ルームがなければルームを新規作成
+      if (!$resultcnt) {
+        $sql = 'INSERT INTO rooms (room, pass) VALUE (:room, :pass)';
+        $prepare = $db->prepare($sql);
+        $prepare->bindValue(':room', $room, PDO::PARAM_STR);
+        $prepare->bindValue(':pass', $password, PDO::PARAM_STR);
+        $prepare->execute();
+      }
+    } else {
+      console_log("半角英数以外が含まれている。");
     }
   }
 ?>

@@ -24,6 +24,13 @@ body {
   text-align: center;
 }
 
+.title label {
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+  font-weight: bold;
+}
+
 .textRed {
   color: #33ff33;
 }

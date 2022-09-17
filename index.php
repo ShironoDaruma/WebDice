@@ -1,6 +1,30 @@
 <?php
-  require("bin/php/tools.php");
-  require_once("bin/php/connection_database.php");
+  // 便利関数など
+  require "./bin/php/tools.php";
+  // データベース接続
+  require_once "./bin/php/connection_database.php";
+
+  // 新規ルーム作成
+  if ($_POST['newroom']) {
+    $room = $_POST['room'];
+    $password = $_POST['password'];
+    // ルームが既にあるか確認
+    $sql = 'SELECT * FROM rooms WHERE room = :room';
+    $prepare = $db->prepare($sql);
+    $prepare->bindValue(':room', $room, PDO::PARAM_STR);
+    $prepare->execute();
+    $result = $prepare->fetchALL();
+    $resultcnt = count($result);
+    console_log($sql.":".$resultcnt);
+    // ルームがなければルームを新規作成
+    if (!$resultcnt) {
+      $sql = 'INSERT INTO rooms (room, pass) VALUE (:room, :pass)';
+      $prepare = $db->prepare($sql);
+      $prepare->bindValue(':room', $room, PDO::PARAM_STR);
+      $prepare->bindValue(':pass', $password, PDO::PARAM_STR);
+      $prepare->execute();
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -19,10 +43,10 @@
         <h1><span class="textRed">WebDice</span></h1>
 
         <p><span class="textWhite">簡単な操作でダイスをロールできる会員登録不要のオンラインダイスツールです。</span></p>
-        <p><span class="textWhite">ルームURLを自由に決めて、ダイス結果をリアルタイムで皆に共有できます。</span></p><br>
+        <p><span class="textWhite">ルームIDを自由に決めて、ダイス結果をリアルタイムで皆に共有できます。</span></p><br>
 
-        <p><span class="textWhite">https://shirodaruma.php.xdomain.jp/WebDice/rooms/</span><input type="url" id="url" name="url" placeholder="ルームURLを入力"></p>
-        <p><span class="textWhite">パスワードを入力</span><input type="password" id="password" name="password"></p>
+        <label><span class="textWhite">ルームIDを入力</span></label><input type="text" id="room" name="room" placeholder="半角英数のみ"><br>
+        <label><span class="textWhite">パスワードを入力</span></label><input type="password" id="password" name="password"><br><br>
         <input type="submit" id="newroom" name="newroom" value="新規ルーム">
         <input type="submit" id="roomIn" name="roomIn" value="ルーム入室">
       </form>

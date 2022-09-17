@@ -31,6 +31,18 @@ body {
   font-weight: bold;
 }
 
+.title .input {
+  border: none;
+  border-bottom: 2px solid #000000;
+  background-color: rgba(0,0,0,0);
+  color: #ffffff;
+  ime-mode: disabled;
+}
+
+.title .input:focus {
+  outline: none;
+}
+
 .textRed {
   color: #33ff33;
 }

@@ -42,6 +42,7 @@
       echo json_encode($array);
       exit(0);
     }
+    // ↓ここまだ作ってない
     foreach ($result as $loop) {
       $array = array(
         'room'=>'roomin',
@@ -51,8 +52,13 @@
         'result'=>$loop['result']
       );
     }
+    $array = array(
+      'room'=>'roomin',
+      'data'=>''
+    );
     echo json_encode($array);
     exit(0);
+    // ↑ここまだ作ってない
   } else {
     $array = array(
       'room'=>'half_width'

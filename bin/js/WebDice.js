@@ -2,6 +2,7 @@ var room, password
 
 $(document).on('click', '#newroom', function () {
   $('#load').css('display', 'block')
+  $('#error').css('display', 'none')
   room = $('#room').val()
   password = $('#password').val()
 
@@ -14,7 +15,8 @@ $(document).on('click', '#newroom', function () {
     type: 'POST',
     url: 'http://shirodaruma.php.xdomain.jp/WebDice/bin/php/createRoom.php',
     dataType: 'json',
-    data: data
+    data: data,
+    timeout: 10000
   })
   .done(function (res) {
     console.log(res["room"])
@@ -28,54 +30,28 @@ $(document).on('click', '#newroom', function () {
     } else {
       $('#half_width_error').css('display', 'none')
     }
+    if (res["room"] == 'create') {
+      roomIn()
+    }
   })
   .fail(function (xhr) {
     console.log(xhr)
+    $('#error').css('display', 'block')
   })
   $('#load').css('display', 'none')
 })
 
 function roomIn() {
-  var data = {
-    'room' : room,
-    'password' : password
-  }
-
-  $.ajax({
-    type: 'POST',
-    url: 'http://shirodaruma.php.xdomain.jp/WebDice/bin/php/getRoom.php',
-    dataType: 'json',
-    data: data
-  })
-  .done(function (res) {
-    console.log(res["room"])
-    console.log(res["num"])
-    console.log(res["p_name"])
-    console.log(res["p_id"])
-    console.log(res["result"])
-
-    if (res["room"] == 'half_width') {
-      $('#half_width_error').css('display', 'block')
-    } else {
-      $('#half_width_error').css('display', 'none')
-    }
-    if (res["room"] == 'no_room') {
-      $('#no_room_error').css('display', 'block')
-    } else {
-      $('#no_room_error').css('display', 'none')
-    }
-  })
-  .fail(function (xhr) {
-    console.log(xhr)
-  })
+  $('<form/>', {action: '', method: 'post'})
+  .append($('<input/>', {type: 'hidden', name: 'room', value: room}))
+  .append($('<input/>', {type: 'hidden', name: 'password', value: password}))
+  .appendTo(document.body)
+  .submit();
 }
 
 $(document).on('click', '#roomin', function() {
-  $('#load').css('display', 'block')
   room = $('#room').val()
   password = $('#password').val()
 
   roomIn()
-
-  $('#load').css('display', 'none')
 })

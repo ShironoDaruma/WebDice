@@ -29,36 +29,34 @@
       exit(0);
     }
     // ルーム情報取得
-    $sql = 'SELECT * FROM results WHERE room = :room';
+    $sql = 'SELECT * FROM results WHERE room = :room ORDER BY num';
     $prepare = $db->prepare($sql);
     $prepare->bindValue(':room', $room, PDO::PARAM_STR);
     $prepare->execute();
     $result = $prepare->fetchALL();
     $resultcnt = count($result);
-    if (!$resultcnt) {
-      $array = array(
-        'room'=>'newroom'
-      );
-      echo json_encode($array);
-      exit(0);
-    }
-    // ↓ここまだ作ってない
+    
+    $p_name = array();
+    $p_id = array();
+    $result = array();
+    $date = array();
+    $sum = 0;
     foreach ($result as $loop) {
-      $array = array(
-        'room'=>'roomin',
-        'num'=>$loop['num'],
-        'p_name'=>$loop['p_name'],
-        'p_id'=>$loop['p_id'],
-        'result'=>$loop['result']
-      );
+      array_push($p_name, $loop['p_name']);
+      array_push($p_id, $loop['p_id']);
+      array_push($result, $loop['result']);
+      array_push($date, $loop['date_text']);
+      $sum++;
     }
     $array = array(
-      'room'=>'roomin',
-      'data'=>''
+      'p_name'=>$p_name,
+      'p_id'=>$p_id,
+      'result'=>$result,
+      'date'=>$date,
+      'sum'=>$sum
     );
     echo json_encode($array);
     exit(0);
-    // ↑ここまだ作ってない
   } else {
     $array = array(
       'room'=>'half_width'

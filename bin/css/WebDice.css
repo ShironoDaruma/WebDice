@@ -27,6 +27,13 @@ body {
   height: 32px;
 }
 
+.footer {
+  margin: 0;
+  padding: 10px;
+  height: fit-content;
+  background: linear-gradient(180deg, #000000 0%, #333333 33%);
+}
+
 .title {
   margin: auto;
   width: 95%;

@@ -5,10 +5,15 @@ body {
 }
 
 .header {
+  display: flex;
   margin: 0;
   padding: 10px;
   height: fit-content;
   background: linear-gradient(0deg, #000000 0%, #333333 33%);
+}
+.logo {
+  width: calc(100% - 40px);
+  text-align: left;
 }
 .header h2 {
   margin: auto;

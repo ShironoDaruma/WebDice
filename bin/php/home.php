@@ -9,7 +9,8 @@
   </head>
   <body>
     <div class="header">
-      <h2><a href="#"><span class="textGreen">WebDice</span></a></h1><img src="./bin/img/load.gif" id="load">
+      <div class="logo"><h2><a href="#"><span class="textGreen">WebDice</span></a></h1></div>
+      <div class="load"><img src="./bin/img/load.gif" id="load"></div>
     </div>
     <div class="title">
       <form autocomplete="off">
@@ -20,7 +21,7 @@
 
         <label><span class="textWhite">ルームIDを入力</span></label><input type="text" id="room" name="room" class="input" placeholder="半角英数のみ" pattern="^[0-9a-zA-Z]+$" required><br>
         <label><span class="textWhite">パスワードを入力</span></label><input type="password" id="password" class="input" name="password" required><br><br>
-        <input type="button" id="newroom" name="newroom" onclick="newRoom()" value="新規ルーム">
+        <input type="button" id="newroom" name="newroom" value="新規ルーム">
         <input type="button" id="roomIn" name="roomIn" value="ルーム入室"><br>
         <p id="exist_error"><span class="textRed">(エラー)そのルームIDは既に使用されています。</span></p>
       </form>

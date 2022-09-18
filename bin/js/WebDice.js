@@ -49,7 +49,7 @@ function roomIn() {
   .submit();
 }
 
-$(document).on('click', '#roomin', function() {
+$(document).on('click', '#roomIn', function() {
   room = $('#room').val()
   password = $('#password').val()
 

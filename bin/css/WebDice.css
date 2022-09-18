@@ -17,6 +17,7 @@ body {
 }
 .header h2 {
   margin: auto;
+  text-align: left;
 }
 .header a {
   text-decoration: none;
@@ -70,6 +71,9 @@ body {
   font-weight: bold;
 }
 
+.title #error {
+  display: none;
+}
 .title #exist_error {
   display: none;
 }

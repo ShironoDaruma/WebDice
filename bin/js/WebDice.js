@@ -23,6 +23,11 @@ $(document).on('click', '#newroom', function () {
     } else {
       $('#exist_error').css('display', 'none')
     }
+    if (res["room"] == 'half_width') {
+      $('#half_width_error').css('display', 'block')
+    } else {
+      $('#half_width_error').css('display', 'block')
+    }
   })
   .fail(function(xhr) {
     console.log(xhr)

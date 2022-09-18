@@ -66,6 +66,9 @@ body {
 .title #exist_error {
   display: none;
 }
+.title #half_width_error {
+  display: none;
+}
 
 .textGreen {
   color: #33ff33;

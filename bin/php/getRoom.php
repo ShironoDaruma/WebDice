@@ -6,36 +6,58 @@
 
   header('Content-Type: application/json; charset=utf-8');
 
-  // 新規ルーム作成
+  // WebDice.jsから
   $room = $_POST['room'];
   $password = $_POST['password'];
 
   // 入力内容が半角英数か確認
   if ( ishalfwidth($room) && ishalfwidth($password) ) {
-    // ルームが既にあるか確認
-    $sql = 'SELECT * FROM rooms WHERE room = :room';
+    // ルーム照合
+    $sql = 'SELECT * FROM rooms WHERE room = :room AND pass = :pass';
+    $prepare = $db->prepare($sql);
+    $prepare->bindValue(':room', $room, PDO::PARAM_STR);
+    $prepare->bindValue(':pass', $password, PDO::PARAM_STR);
+    $prepare->execute();
+    $result = $prepare->fetch();
+    $resultcnt = count($result);
+    // ルームがなければerror
+    if (!$resultcnt) {
+      $array = array(
+        'room'=>'no_room'
+      );
+      echo json_encode($array);
+      exit(0);
+    }
+    // ルーム情報取得
+    $sql = 'SELECT * FROM results WHERE room = :room';
     $prepare = $db->prepare($sql);
     $prepare->bindValue(':room', $room, PDO::PARAM_STR);
     $prepare->execute();
     $result = $prepare->fetchALL();
     $resultcnt = count($result);
-    // ルームがなければルームを新規作成
     if (!$resultcnt) {
-      $sql = 'INSERT INTO rooms (room, pass) VALUE (:room, :pass)';
-      $prepare = $db->prepare($sql);
-      $prepare->bindValue(':room', $room, PDO::PARAM_STR);
-      $prepare->bindValue(':pass', $password, PDO::PARAM_STR);
-      $prepare->execute();
       $array = array(
-        'room'=>'create'
+        'room'=>'newroom'
       );
       echo json_encode($array);
       exit(0);
     }
+    foreach ($result as $loop) {
+      $array = array(
+        'room'=>'roomin',
+        'num'=>$loop['num'],
+        'p_name'=>$loop['p_name'],
+        'p_id'=>$loop['p_id'],
+        'result'=>$loop['result']
+      );
+    }
+    echo json_encode($array);
+    exit(0);
+  } else {
+    $array = array(
+      'room'=>'half_width'
+    );
+    echo json_encode($array);
+    exit(0);
   }
-  $array = array(
-    'room'=>'exist'
-  );
-  echo json_encode($array);
-  exit(0);
 ?>

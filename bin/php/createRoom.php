@@ -6,7 +6,7 @@
 
   header('Content-Type: application/json; charset=utf-8');
 
-  // 新規ルーム作成
+  // WebDice.jsから
   $room = $_POST['room'];
   $password = $_POST['password'];
 
@@ -32,6 +32,12 @@
       echo json_encode($array);
       exit(0);
     }
+  } else {
+    $array = array(
+      'room'=>'half_width'
+    );
+    echo json_encode($array);
+    exit(0);  
   }
   $array = array(
     'room'=>'exist'

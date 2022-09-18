@@ -24,6 +24,7 @@
         <input type="button" id="newroom" name="newroom" value="新規ルーム">
         <input type="button" id="roomIn" name="roomIn" value="ルーム入室"><br>
         <p id="exist_error"><span class="textRed">(エラー)そのルームIDは既に使用されています。</span></p>
+        <p id="half_width_error"><span class="textRed">(エラー)ルームIDとパスワードに半角英数以外が含まれています。</span></p>
       </form>
     </div>
   </body>

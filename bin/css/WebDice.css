@@ -22,10 +22,22 @@ body {
 .header a {
   text-decoration: none;
 }
-.header #load {
+.load {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
   display: none;
-  width: 32px;
-  height: 32px;
+  width: 96px;
+  height: 96px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+.load-gif {
+  padding: 16px;
+  margin: auto;
 }
 
 .footer {

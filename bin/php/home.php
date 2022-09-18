@@ -8,9 +8,9 @@
     <script src="./bin/js/WebDice.js"></script>
   </head>
   <body>
+    <div class="load" id="load"><img src="./bin/img/load.gif" class="load-gif"></div>
     <div class="header">
       <div class="logo"><h2><a href="#"><span class="textGreen">WebDice</span></a></h2></div>
-      <div class="load"><img src="./bin/img/load.gif" id="load"></div>
     </div>
     <div class="title">
       <form autocomplete="off">

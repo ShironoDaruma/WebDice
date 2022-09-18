@@ -16,6 +16,11 @@ body {
 .header a {
   text-decoration: none;
 }
+.header #load {
+  display: none;
+  width: 32px;
+  height: 32px;
+}
 
 .title {
   margin: auto;
@@ -42,7 +47,7 @@ body {
   outline: none;
 }
 
-.title input[type="submit"] {
+.title input[type="button"] {
   width: 30%;
   max-width: 200px;
   height: 40px;
@@ -53,10 +58,16 @@ body {
   font-weight: bold;
 }
 
-.textRed {
-  color: #33ff33;
+.title #exist_error {
+  display: none;
 }
 
+.textGreen {
+  color: #33ff33;
+}
+.textRed {
+  color: #ff0000;
+}
 .textWhite {
   color: #ffffff;
 }

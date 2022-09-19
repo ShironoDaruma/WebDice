@@ -97,6 +97,13 @@ body {
 #sendValue {
   width: 90vw;
 }
+#send {
+  margin: 7px;
+  width: fit-content;
+  height: 16px;
+  background-color: rgba(0,0,0,0);
+  color: #ffffff;
+}
 .footer input:focus {
   outline: none;
 }

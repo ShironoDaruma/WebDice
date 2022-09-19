@@ -1,5 +1,5 @@
 $(function(){
-	setInterval(getRoom(),500)
+	setInterval("getRoom()",500)
 })
 
 var room, password, sum
@@ -8,7 +8,7 @@ function getRoom() {
   sum = $('#sum').val()
   room = $('#room').val()
   password = $('#pass').val()
-
+  console.log("data-get")
   var data = {
     'room' : room,
     'password' : password
@@ -25,8 +25,8 @@ function getRoom() {
     console.log(res["room"])
     console.log(res["num"])
     console.log(res["p_name"])
-    console.log(res["p_id"])
     console.log(res["result"])
+    console.log(res["date"])
     console.log(res["sum"])
   
     if (res["room"] == 'half_width') {
@@ -35,7 +35,7 @@ function getRoom() {
       return
     }
     if (res["room"] == 'no_room') {
-      lert('ルームIDまたはパスワードが不正です。再度ログインしてください。')
+      alert('ルームIDまたはパスワードが不正です。再度ログインしてください。')
       // window.location.href = "http://shirodaruma.php.xdomain.jp/WebDice/"
       return
     }
@@ -44,7 +44,6 @@ function getRoom() {
       roomData += `
       <div class="hist" id="`+i+`">
         <div class="name">`+res["p_name"]+`</div>
-        <div class="id">`+res["p_id"]+`</div>
         <div class="date">`+res["date"]+`</div>
         <div class="text">`+res["result"]+`</div>
       </div>
@@ -64,6 +63,6 @@ function getRoom() {
   })
   .fail(function (xhr) {
     console.log(xhr)
-    $('#error').css('display', 'block')
+    console.log("fail")
   })
 }

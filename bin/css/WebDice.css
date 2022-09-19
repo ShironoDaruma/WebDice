@@ -1,6 +1,9 @@
+* {
+  padding: 0;
+  overflow: hidden;
+}
 body {
   margin: 0;
-  padding: 0;
   background-color: #333333;
 }
 
@@ -8,7 +11,7 @@ body {
   display: flex;
   margin: 0;
   padding: 10px;
-  height: fit-content;
+  height: 36px;
   background: linear-gradient(0deg, #000000 0%, #333333 33%);
 }
 .logo {
@@ -16,7 +19,7 @@ body {
   text-align: left;
 }
 .header h2 {
-  margin: auto;
+  margin: 0;
   text-align: left;
 }
 .header a {
@@ -40,10 +43,11 @@ body {
   margin: auto;
 }
 
+.field {
+  height: calc(100vh - 156px);
+}
 .footer {
-  margin: 0;
-  padding: 10px;
-  height: fit-content;
+  height: 100px;
   background: linear-gradient(180deg, #000000 0%, #333333 33%);
 }
 
@@ -53,14 +57,12 @@ body {
   height: fit-content;
   text-align: center;
 }
-
 .title label {
   display: inline-block;
   width: 150px;
   text-align: left;
   font-weight: bold;
 }
-
 .title .input {
   border: none;
   border-bottom: 2px solid #000000;
@@ -71,7 +73,6 @@ body {
 .title .input:focus {
   outline: none;
 }
-
 .title input[type="button"] {
   width: 30%;
   max-width: 200px;
@@ -81,6 +82,23 @@ body {
   border-radius: 2px;
   color: #ffffff;
   font-weight: bold;
+}
+
+.footer input {
+  margin: 7px;
+  margin-left: 10px;
+  border: 0;
+  border-radius: 5px;
+  height: 16px;
+}
+#sendName {
+  margin-top: 35px;
+}
+#sendValue {
+  width: 90vw;
+}
+.footer input:focus {
+  outline: none;
 }
 
 .title #error {

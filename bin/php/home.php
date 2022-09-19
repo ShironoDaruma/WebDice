@@ -10,7 +10,7 @@
   <body>
     <div class="load" id="load"><img src="./bin/img/load.gif" class="load-gif"></div>
     <div class="header">
-      <div class="logo"><h2><a href="#"><span class="textGreen">WebDice</span></a></h2></div>
+      <div class="logo"><h2><a href="http://shirodaruma.php.xdomain.jp/WebDice/"><span class="textGreen">WebDice</span></a></h2></div>
     </div>
     <div class="title">
       <form autocomplete="off">

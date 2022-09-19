@@ -37,20 +37,17 @@
     $resultcnt = count($result);
     
     $p_name = array();
-    $p_id = array();
     $result = array();
     $date = array();
     $sum = 0;
     foreach ($result as $loop) {
       array_push($p_name, $loop['p_name']);
-      array_push($p_id, $loop['p_id']);
       array_push($result, $loop['result']);
       array_push($date, $loop['date_text']);
       $sum++;
     }
     $array = array(
       'p_name'=>$p_name,
-      'p_id'=>$p_id,
       'result'=>$result,
       'date'=>$date,
       'sum'=>$sum

@@ -3,6 +3,8 @@ var room, password
 $(document).on('click', '#newroom', function () {
   $('#load').css('display', 'block')
   $('#error').css('display', 'none')
+  $('#half_width_error').css('display', 'none')
+  $('#exist_error').css('display', 'none')
   room = $('#room').val()
   password = $('#password').val()
 
@@ -22,13 +24,9 @@ $(document).on('click', '#newroom', function () {
     console.log(res["room"])
     if (res["room"] == 'exist') {
       $('#exist_error').css('display', 'block')
-    } else {
-      $('#exist_error').css('display', 'none')
     }
     if (res["room"] == 'half_width') {
       $('#half_width_error').css('display', 'block')
-    } else {
-      $('#half_width_error').css('display', 'none')
     }
     if (res["room"] == 'create') {
       roomIn()
@@ -38,7 +36,11 @@ $(document).on('click', '#newroom', function () {
     console.log(xhr)
     $('#error').css('display', 'block')
   })
-  $('#load').css('display', 'none')
+  .always(function () {
+    setTimeout(function(){
+      $('#load').css('display', 'none')
+    }, 10)
+  })
 })
 
 function roomIn() {
@@ -52,6 +54,5 @@ function roomIn() {
 $(document).on('click', '#roomIn', function() {
   room = $('#room').val()
   password = $('#password').val()
-
   roomIn()
 })

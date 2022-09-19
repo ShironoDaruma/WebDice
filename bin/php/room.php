@@ -11,8 +11,9 @@
         <script src=\"./bin/js/getRoom.js\"></script>
       </head>
       <body>
+        <div class=\"load\" id=\"load\"><img src=\"./bin/img/load.gif\" class=\"load-gif\"></div>
         <div class=\"header\">
-          <h2><a href=\"#\"><span class=\"textGreen\">WebDice</span></a></h2>
+          <h2><a href=\"http://shirodaruma.php.xdomain.jp/WebDice/\"><span class=\"textGreen\">WebDice</span></a></h2>
         </div>
         <div class=\"field\" id=\"field\">
           <div id=\"getData\">
@@ -20,7 +21,8 @@
           </div>
         </div>
         <div class=\"footer\">
-          <p>footer</p>
+          <input type=\"text\" id=\"sendName\" placeholder=\"名前を入力\"><br>
+          <input type=\"text\" id=\"sendValue\" placeholder=\"ダイスを入力\">
         </div>
         <input type=\"hidden\" id=\"room\" value=\"$room\" style=\"display:none\">
         <input type=\"hidden\" id=\"pass\" value=\"$pass\" style=\"display:none\">

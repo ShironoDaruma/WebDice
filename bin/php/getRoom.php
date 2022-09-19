@@ -34,23 +34,22 @@
     $prepare->bindValue(':room', $room, PDO::PARAM_STR);
     $prepare->execute();
     $result = $prepare->fetchALL();
-    $resultcnt = count($result);
     
     $p_name = array();
-    $result = array();
+    $result_text = array();
     $date = array();
-    $sum = 0;
     foreach ($result as $loop) {
       array_push($p_name, $loop['p_name']);
-      array_push($result, $loop['result']);
+      array_push($result_text, $loop['result']);
       array_push($date, $loop['date_text']);
-      $sum++;
+      $num = $loop['num'];
     }
     $array = array(
       'p_name'=>$p_name,
-      'result'=>$result,
+      'result'=>$result_text,
       'date'=>$date,
-      'sum'=>$sum
+      'sum'=>$prepare->rowCount(),
+      'num'=>$num
     );
     echo json_encode($array);
     exit(0);

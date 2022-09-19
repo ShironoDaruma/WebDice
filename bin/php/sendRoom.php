@@ -10,7 +10,7 @@
   $room = $_POST['room'];
   $password = $_POST['password'];
   $p_name = $_POST['sendName'];
-  $result = $_POST['sendValue'];
+  $result_text = $_POST['sendValue'];
   $date_text = $_POST['date'];
   $num = $_POST['num'];
 
@@ -38,7 +38,7 @@
     $prepare->bindValue(':room', $room, PDO::PARAM_STR);
     $prepare->bindValue(':num', $num, PDO::PARAM_INT);
     $prepare->bindValue(':p_name', $p_name, PDO::PARAM_STR);
-    $prepare->bindValue(':result', $result, PDO::PARAM_STR);
+    $prepare->bindValue(':result', $result_text, PDO::PARAM_STR);
     $prepare->bindValue(':date_text', $date_text, PDO::PARAM_STR);
     $prepare->execute();
     

@@ -8,7 +8,7 @@ function getRoom() {
   sum = $('#sum').val()
   room = $('#room').val()
   password = $('#pass').val()
-  console.log("data-get")
+  // console.log("data-get")
   var data = {
     'room' : room,
     'password' : password
@@ -22,12 +22,7 @@ function getRoom() {
     timeout: 10000
   })
   .done(function (res) {
-    console.log(res["room"])
-    console.log(res["num"])
-    console.log(res["p_name"])
-    console.log(res["result"])
-    console.log(res["date"])
-    console.log(res["sum"])
+    console.log(res)
   
     if (res["room"] == 'half_width') {
       alert('ルームIDが不正です。再度ログインしてください。')
@@ -49,13 +44,14 @@ function getRoom() {
       </div>
       `
     }
+    // console.log(roomData)
     if (sum == res["sum"]) {
       return
     } else {
       $('#getData').remove()
       $('#field').append(`
       <div id="getData">
-        <input type="hidden" id="maxNum" value="`+res["num"][res["sum"]-1]+`" style="display:none">
+        <input type="hidden" id="maxNum" value="`+res["num"]+`" style="display:none">
         <input type="hidden" id="sum" value="`+res["sum"]+`" style="display:none">
         `+roomData+`
       </div>
@@ -76,6 +72,9 @@ $(document).on('click', '#send', function () {
   sendName = $('#sendName').val()
   sendValue = $('#sendValue').val()
   maxNum = $('#maxNum').val()
+  if (isNaN(maxNum)) {
+    maxNum = 0;
+  }
 
   console.log("data-send")
 
@@ -99,7 +98,7 @@ $(document).on('click', '#send', function () {
     timeout: 10000
   })
   .done(function (res) {
-    console.log(res["send"])
+    console.log("send:"+res["send"])
   
     if (res["send"] == 'half_width') {
       alert('ルームIDが不正です。再度ログインしてください。')

@@ -44,6 +44,7 @@ body {
 }
 
 .field {
+  overflow-y: auto;
   height: calc(100vh - 156px);
 }
 .footer {

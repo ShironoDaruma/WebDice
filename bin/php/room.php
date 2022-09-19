@@ -21,8 +21,15 @@
           </div>
         </div>
         <div class=\"footer\">
-          <input type=\"text\" id=\"sendName\" placeholder=\"名前を入力\"><br>
-          <input type=\"text\" id=\"sendValue\" placeholder=\"ダイスを入力\"><input type=\"button\" id=\"send\" value=\"送信\">
+          <input type=\"text\" id=\"sendName\" placeholder=\"名前を入力\">
+          <input type=\"button\" class=\"dice\" onclick=\"sendDice('1D4')\" value=\"1D4\">
+          <input type=\"button\" class=\"dice\" onclick=\"sendDice('1D6')\" value=\"1D6\">
+          <input type=\"button\" class=\"dice\" onclick=\"sendDice('1D8')\" value=\"1D8\">
+          <input type=\"button\" class=\"dice\" onclick=\"sendDice('1D10')\" value=\"1D10\">
+          <input type=\"button\" class=\"dice\" onclick=\"sendDice('tens')\" value=\"tens\">
+          <input type=\"button\" class=\"dice\" onclick=\"sendDice('1D12')\" value=\"1D12\">
+          <input type=\"button\" class=\"dice\" onclick=\"sendDice('1D20')\" value=\"1D20\"><br>
+          <input type=\"text\" id=\"sendValue\" placeholder=\"ダイスを入力\"><input type=\"button\" id=\"send\" onclick=\"sendRoom()\" value=\"送信\">
         </div>
         <input type=\"hidden\" id=\"room\" value=\"$room\" style=\"display:none\">
         <input type=\"hidden\" id=\"pass\" value=\"$pass\" style=\"display:none\">

@@ -26,25 +26,31 @@ function getRoom() {
   
     if (res["room"] == 'half_width') {
       alert('ルームIDが不正です。再度ログインしてください。')
-      // window.location.href = "http://shirodaruma.php.xdomain.jp/WebDice/"
+      window.location.href = "http://shirodaruma.php.xdomain.jp/WebDice/"
       return
     }
     if (res["room"] == 'no_room') {
       alert('ルームIDまたはパスワードが不正です。再度ログインしてください。')
-      // window.location.href = "http://shirodaruma.php.xdomain.jp/WebDice/"
+      window.location.href = "http://shirodaruma.php.xdomain.jp/WebDice/"
       return
     }
-    var roomData = ""
+    if (res["room"] == 'excess') {
+      alert('ルームを作成してから7日を超過しています。このルームはすでに削除されています。')
+      window.location.href = "http://shirodaruma.php.xdomain.jp/WebDice/"
+      return
+    }
+    var roomData = `<hr>
+    `
     for (var i = 0; i < res["sum"]; i++) {
       roomData += `
       <div class="hist" id="`+i+`">
-        <div class="name">`+res["p_name"][i]+`</div>
-        <div class="date">`+res["date"][i]+`</div>
+        <div class="name" style="display: inline-block">`+res["p_name"][i]+`</div>
+        <div class="date" style="display: inline-block">`+res["date"][i]+`</div>
         <div class="text">`+res["result"][i]+`</div>
+        <hr>
       </div>
       `
     }
-    // console.log(roomData)
     if (sum == res["sum"]) {
       return
     } else {
@@ -57,6 +63,9 @@ function getRoom() {
       </div>
       `)
     }
+    $("#field").animate({
+      scrollTop: $("#field").get(0).scrollHeight
+    },)
   })
   .fail(function (xhr) {
     console.log(xhr)
@@ -66,11 +75,14 @@ function getRoom() {
 
 var sendName, sendValue, maxNum
 
-$(document).on('click', '#send', function () {
+function sendRoom () {
   room = $('#room').val()
   password = $('#pass').val()
   sendName = $('#sendName').val()
   sendValue = $('#sendValue').val()
+  if (!sendValue || !sendName) {
+    return
+  }
   maxNum = $('#maxNum').val()
   if (isNaN(maxNum)) {
     maxNum = 0;
@@ -78,16 +90,12 @@ $(document).on('click', '#send', function () {
 
   console.log("data-send")
 
-  var now = new Date()
-  var date = now.getFullYear() + "/" + now.getMonth() + 1 + "/" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds()
-  
   var data = {
     'room' : room,
     'password' : password,
     'sendName' : sendName,
     'sendValue' : sendValue,
-    'date' : date,
-    'num' : maxNum + 1
+    'num' : Number(maxNum) + 1
   }
   
   $.ajax({
@@ -102,18 +110,39 @@ $(document).on('click', '#send', function () {
   
     if (res["send"] == 'half_width') {
       alert('ルームIDが不正です。再度ログインしてください。')
-      // window.location.href = "http://shirodaruma.php.xdomain.jp/WebDice/"
+      window.location.href = "http://shirodaruma.php.xdomain.jp/WebDice/"
       return
     }
     if (res["send"] == 'no_room') {
       alert('ルームIDまたはパスワードが不正です。再度ログインしてください。')
-      // window.location.href = "http://shirodaruma.php.xdomain.jp/WebDice/"
+      window.location.href = "http://shirodaruma.php.xdomain.jp/WebDice/"
+      return
+    }
+    if (res["send"] == 'excess') {
+      alert('ルームを作成してから7日を超過しています。このルームはすでに削除されています。')
+      window.location.href = "http://shirodaruma.php.xdomain.jp/WebDice/"
       return
     }
     getRoom()
+    $('#sendValue').val('')
   })
   .fail(function (xhr) {
     console.log(xhr)
     console.log("fail")
   })
-})
+}
+
+function sendDice(dices) {
+  if ($('#sendValue').val() == dices) {
+    sendRoom()
+  } else {
+    $('#sendValue').val(dices)
+  }
+}
+
+// $(document).on('keydown', function(e) {
+//   if (e.keyCode == 229 || e.which == 229) {
+//     alert('?')
+//     sendRoom()
+//   }
+// })

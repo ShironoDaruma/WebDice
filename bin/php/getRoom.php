@@ -19,6 +19,17 @@
     $prepare->bindValue(':pass', $password, PDO::PARAM_STR);
     $prepare->execute();
     $result = $prepare->fetch();
+    $data_date = new DateTime($result['date_text']);
+    $now_date = new DateTime(date('Y/m/d H:i:s'));
+    $diff = $data_date->diff($now_date);
+    // ルームを作ってから7日を超過している場合error
+    if ($diff->d > 7) {
+      $array = array(
+        'room'=>'excess'
+      );
+      echo json_encode($array);
+      exit(0);
+    }
     $resultcnt = count($result);
     // ルームがなければerror
     if (!$resultcnt) {

@@ -7,7 +7,7 @@ $(document).on('click', '#newroom', function () {
   $('#exist_error').css('display', 'none')
   room = $('#room').val()
   password = $('#password').val()
-
+  
   var data = {
     'room' : room,
     'password' : password

@@ -10,8 +10,10 @@
   $room = $_POST['room'];
   $password = $_POST['password'];
   $p_name = $_POST['sendName'];
-  $result_text = $_POST['sendValue'];
-  $date_text = $_POST['date'];
+  $result_before = $_POST['sendValue'];
+  $result_after = DiceToResult($result_before);
+  $result_text = $result_before . " > ". addResult($result_after);
+  $date_text = date('Y/m/d H:i:s');
   $num = $_POST['num'];
 
   // 入力内容が半角英数か確認
@@ -23,6 +25,17 @@
     $prepare->bindValue(':pass', $password, PDO::PARAM_STR);
     $prepare->execute();
     $result = $prepare->fetch();
+    $data_date = new DateTime($result['date_text']);
+    $now_date = new DateTime(date('Y/m/d H:i:s'));
+    $diff = $data_date->diff($now_date);
+    // ルームを作ってから7日を超過している場合error
+    if ($diff->d > 7) {
+      $array = array(
+        'send'=>'excess'
+      );
+      echo json_encode($array);
+      exit(0);
+    }
     $resultcnt = count($result);
     // ルームがなければerror
     if (!$resultcnt) {
